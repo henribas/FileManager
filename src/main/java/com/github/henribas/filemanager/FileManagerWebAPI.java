@@ -1,4 +1,4 @@
-package com.github.henribas.filemanager.webapi;
+package com.github.henribas.filemanager;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -12,8 +12,6 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-
-import com.github.henribas.filemanager.FileManager;
 
 @Path("/api/file-manager")
 @RequestScoped

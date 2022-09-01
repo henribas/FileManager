@@ -34,7 +34,7 @@ class DefaultFileManager implements FileManager {
 
     @Override
     public String upload(MultipartFormDataInput input) throws WebApplicationException {
-        validadeInput(input);
+        validateInput(input);
 
         Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
         List<String> fileNames = new ArrayList<>();
@@ -48,7 +48,7 @@ class DefaultFileManager implements FileManager {
                 fileNames.add(fileName);
 
                 byte[] bytes = IOUtils.toByteArray(inputPart.getBody(InputStream.class, null));
-                validadeFileSize(bytes);
+                validateFileSize(bytes);
 
                 fullPathFileName.append(getDefaultDirectory().getAbsolutePath()).append(File.separator).append(fileName);
                 Files.write(Paths.get(fullPathFileName.toString()), bytes, StandardOpenOption.CREATE_NEW);
@@ -83,13 +83,13 @@ class DefaultFileManager implements FileManager {
 		throw new WebApplicationException("Invalid filename.", Response.Status.BAD_REQUEST);
 	}
 
-    private void validadeInput(MultipartFormDataInput input) throws WebApplicationException {
+    private void validateInput(MultipartFormDataInput input) throws WebApplicationException {
         if (input == null) {
             throw new WebApplicationException("Please select a file to upload.", Response.Status.BAD_REQUEST);
         }
     }
 
-    private void validadeFileSize(byte[] bytes) {
+    private void validateFileSize(byte[] bytes) {
         if (bytes.length > MAX_FILE_SIZE_IN_BYTES) {
             throw new WebApplicationException("The file size must be less than 5MB.", Response.Status.BAD_REQUEST);
         }
