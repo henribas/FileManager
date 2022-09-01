@@ -36,6 +36,16 @@ class FileManagerWebAPITest {
     }
 
     @Test
+    void testFileAlreadySent() {
+        given()
+            .multiPart(getMultiPart())
+            .when().post("/api/file-manager/upload")
+            .then()
+                .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
+                .body(is("This file has already been uploaded."));
+    }
+
+    @Test
     void mustInformInput() {
         FileManager fileManager = new DefaultFileManager();
         WebApplicationException exception = assertThrows(WebApplicationException.class, () -> {

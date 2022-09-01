@@ -27,7 +27,7 @@ class DefaultFileManager implements FileManager {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultFileManager.class);
 
-    private static final long MAX_FILE_SIZE_IN_BYTES = 5242880l; // 5MB = 5 * 1024 * 1024
+    private static final long MAX_FILE_SIZE_IN_BYTES = 5 * 1024 * 1024l; // 5MB
 
     @ConfigProperty(name = "app.directory")
 	String appDirectory;
