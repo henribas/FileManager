@@ -77,4 +77,13 @@ class FileManagerWebAPITest {
             .build();
     }
 
+    @Test
+    void mustListFiles() {
+        given()
+            .when().get("/api/file-manager/list-files")
+            .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .body("mensagem", is("There are files in this folder."));
+    }
+
 }

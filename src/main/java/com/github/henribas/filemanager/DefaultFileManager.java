@@ -94,5 +94,17 @@ class DefaultFileManager implements FileManager {
             throw new WebApplicationException("The file size must be less than 5MB.", Response.Status.BAD_REQUEST);
         }
     }
+
+    @Override
+    public List<FileVO> listFiles() {
+        File directoryPath = new File(appDirectory);
+        File[] filesList = directoryPath.listFiles(File::isFile);
+        List<FileVO> vos = new ArrayList<>();
+        for (File file : filesList) {
+            vos.add(DefaultFileVO.of(file.getName(), file.toURI(), file.getAbsolutePath(), file.length()));
+        }
+
+        return vos;
+    }
     
 }
